@@ -6,7 +6,7 @@
     memory: 4096
     vlan: 20
     ipv4mode: static
-    ipv4_address: 10.55.20.2/24
+    ipv4_address: 10.55.20.3/24
     ipv4_gateway: 10.55.20.1
     disk_size: 32G
     drive_storage: local-lvm
