@@ -1,13 +1,13 @@
-  - name: k8s-master-01
-    vmid: 200
+  - name: k8s-worker-general-02
+    vmid: 204
     node: pve-01
     image_file: debian-12-generic-amd64.qcow2
-    cores: 2
-    memory: 4096
+    cores: 8
+    memory: 49152
     vlan: 20
     ipv4mode: static
     ipv4_address: 10.55.20.2/24
     ipv4_gateway: 10.55.20.1
-    disk_size: 32G
-    drive_storage: local-lvm
+    disk_size: 128G
+    drive_storage: lvm-1
     state: new

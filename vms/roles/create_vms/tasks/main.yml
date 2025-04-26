@@ -13,9 +13,9 @@
     serial: '{"serial0":"socket"}'
     scsihw: virtio-scsi-single
     scsi:
-      scsi0: '{{drive_storage}}:0,import-from={{image_storage}}:0/{{item.image_file}},format={{drive_format}},iothread=1'
+      scsi0: '{{item.drive_storage}}:0,import-from={{image_storage}}:0/{{item.image_file}},format={{drive_format}},iothread=1'
     ide:
-      ide2: '{{drive_storage}}:cloudinit'
+      ide2: '{{item.drive_storage}}:cloudinit'
     ostype: 'l26'
     onboot: 'no'
     cpu: 'host'
