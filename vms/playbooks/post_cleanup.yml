@@ -47,8 +47,8 @@
     no_log: true
 
   # Pause before starting VM again
-  # Witout a pause, the task may indicate it's already started
-  # Wen that happens, te VM doesn't get started
+  # Without a pause, the task may indicate it's already started
+  # When that happens, te VM doesn't get started
   - name: Pause
     pause:
       seconds: 30

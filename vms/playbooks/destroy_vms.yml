@@ -1,0 +1,33 @@
+- hosts: pvenodes[0]
+  become: true
+  gather_facts: false
+  tasks:
+
+  # Stop VMs
+  - name: Stop VMs
+    proxmox_kvm:
+      api_user: '{{api_user}}'
+      api_token_id: '{{api_token_id}}'
+      api_token_secret: '{{api_token_secret}}'
+      api_host: '{{api_host}}'
+      vmid: '{{item.vmid}}'
+      state: 'stopped'
+      timeout: 180
+    loop: '{{computers}}'
+    when: 'item.state == "new"'
+    no_log: true
+
+  # P
+
+  # Destroy VMs
+  - name: Destroy VMs
+    proxmox_kvm:
+      api_user: '{{api_user}}'
+      api_token_id: '{{api_token_id}}'
+      api_token_secret: '{{api_token_secret}}'
+      api_host: '{{api_host}}'
+      vmid: '{{item.vmid}}'
+      state: 'absent'
+      timeout: 180
+    loop: '{{computers}}'
+    no_log: true
