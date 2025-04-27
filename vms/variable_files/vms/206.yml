@@ -1,4 +1,5 @@
   - name: k8s-worker-ram-02
+    type: worker
     vmid: 206
     node: pve-01
     image_file: debian-12-generic-amd64.qcow2
