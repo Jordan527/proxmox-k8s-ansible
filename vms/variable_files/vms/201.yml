@@ -1,5 +1,5 @@
   - name: k8s-master-02
-    type: master
+    role: master
     vmid: 201
     node: pve-01
     image_file: debian-12-generic-amd64.qcow2
