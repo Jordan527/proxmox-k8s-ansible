@@ -1,0 +1,32 @@
+- name: Install Keepalived and HAProxy for Kubernetes API HA
+  hosts: masters
+  become: true
+  vars:
+    vip: 10.55.10.101
+    interface: eth0
+    priority_offset: 100
+  tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - keepalived
+          - haproxy
+        update_cache: yes
+
+    - name: Configure Keepalived
+      template:
+        src: files/keepalived.conf.j2
+        dest: /etc/keepalived/keepalived.conf
+      notify: restart keepalived
+
+    - name: Configure HAProxy
+      template:
+        src: files/haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+
+  handlers:
+    - name: restart keepalived
+      service:
+        name: keepalived
+        state: restarted
+        enabled: yes

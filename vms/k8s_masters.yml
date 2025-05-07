@@ -1,0 +1,41 @@
+# - hosts: masters
+#   become: yes
+#   tasks:
+#     - name: restart haproxy
+#       service:
+#         name: haproxy
+#         state: restarted
+#         enabled: yes
+
+- name: Generate Join Command and Certificate Key on Primary Master
+  hosts: masters[0]
+  become: yes
+  tasks:
+    - name: Upload control-plane certificates
+      shell: kubeadm init phase upload-certs --upload-certs
+      register: cert_key_output
+
+    - name: Extract certificate key
+      set_fact:
+        cert_key: "{{ cert_key_output.stdout_lines[-1] }}"
+      delegate_to: localhost
+      run_once: true
+
+    - name: Retrieve join command
+      shell: kubeadm token create --print-join-command
+      register: join_command_raw
+
+    - name: Save join command base
+      set_fact:
+        join_command_base: "{{ join_command_raw.stdout_lines[0] }}"
+
+- name: Join additional master nodes
+  hosts: masters[1:]
+  become: yes
+  tasks:
+    - name: Join control plane node to the cluster
+      shell: >
+        {{ hostvars[groups['masters'][0]].join_command_base }}
+        --control-plane --certificate-key {{ hostvars[groups['masters'][0]].cert_key }}
+      args:
+        creates: /etc/kubernetes/kubelet.conf
