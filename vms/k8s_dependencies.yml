@@ -149,3 +149,20 @@
         name: kubectl=1.29.*
         state: present
         force: yes
+
+- hosts: masters[0]
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Download Helm
+      get_url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+      dest: ./get_helm.sh
+      mode: 0755
+
+    - name: Install Helm
+      shell: ./get_helm.sh
+
+    - name: Remove Helm download file
+      file:
+        path: ./get_helm.sh
+        state: absent

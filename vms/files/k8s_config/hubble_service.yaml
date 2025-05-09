@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hubble-ui
+  namespace: kube-system
+spec:
+  type: LoadBalancer
+  selector:
+    k8s-app: hubble-ui  # or whatever label matches
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8081
+  loadBalancerIP: 10.55.10.201
