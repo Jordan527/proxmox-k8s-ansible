@@ -2,6 +2,14 @@
   shell: |
     kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
 
+- name: Wait for all MetalLB pods to be running
+  shell: |
+    kubectl wait --namespace metallb-system \
+      --for=condition=Ready pods --all \
+      --timeout=120s
+  register: wait_result
+  changed_when: false
+
 - name: Create ConfigMap
   shell: |
     kubectl apply -f - <<EOF
