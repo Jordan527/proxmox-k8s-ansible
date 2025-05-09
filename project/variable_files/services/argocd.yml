@@ -1,0 +1,11 @@
+  - name: argocd
+    metadata:
+      name: argocd-lb
+      namespace: argocd
+    selector:
+      app.kubernetes.io/name: argocd-server
+    ports:
+      - name: http
+        port: 443
+        targetPort: 8080
+    loadBalancerIP: 10.55.10.200

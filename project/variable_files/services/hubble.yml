@@ -1,6 +1,6 @@
   - name: hubble
     metadata:
-      name: hubble-ui
+      name: hubble-lb
       namespace: kube-system
     selector:
       k8s-app: hubble-ui
