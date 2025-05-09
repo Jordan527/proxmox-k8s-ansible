@@ -13,7 +13,7 @@ defaults
   timeout server  50000
 
 frontend kubernetes
-  bind {{ vip }}:6443
+  bind {{ vip }}:8443
   mode tcp
   default_backend kube-apiservers
 

@@ -1,12 +1,3 @@
-# - hosts: masters
-#   become: yes
-#   tasks:
-#     - name: restart haproxy
-#       service:
-#         name: haproxy
-#         state: restarted
-#         enabled: yes
-
 - name: Generate Join Command and Certificate Key on Primary Master
   hosts: masters[0]
   become: yes
