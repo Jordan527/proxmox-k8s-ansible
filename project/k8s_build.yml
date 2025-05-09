@@ -14,7 +14,7 @@
       '{{variable_files}}'
 
 - import_playbook: k8s_nodes.yml
-# - import_playbook: k8s_create_cluster.yml
-# - import_playbook: k8s_workers.yml
-# - import_playbook: k8s_masters.yml
+- import_playbook: k8s_create_cluster.yml
+- import_playbook: k8s_workers.yml
+- import_playbook: k8s_masters.yml
 - import_playbook: k8s_create_apps.yml
