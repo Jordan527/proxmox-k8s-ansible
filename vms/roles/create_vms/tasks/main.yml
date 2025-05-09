@@ -9,7 +9,8 @@
     name: '{{item.name}}'
     vmid: '{{item.vmid}}'
     vga: serial0
-    net: '{"net0":"virtio,bridge={{linux_bridge}},tag={{item.vlan}},firewall=1"}'
+    net: '{"net0":"virtio,bridge={{linux_bridge}},firewall=1"}'
+    # net: '{"net0":"virtio,bridge={{linux_bridge}},tag={{item.vlan}},firewall=1"}'
     serial: '{"serial0":"socket"}'
     scsihw: virtio-scsi-single
     scsi:

@@ -1,0 +1,43 @@
+- hosts: masters[0]
+  become: yes
+  gather_facts: false
+  environment:
+    KUBECONFIG: /home/{{ default_user }}/.kube/config
+  tasks:
+  - name: Add the Rancher Helm repo
+    shell: |
+      helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+
+  - name: Update Helm repo
+    shell: |
+      helm repo update
+
+  - name: Create namespace
+    shell: |
+      kubectl create namespace cattle-system
+  
+  - name: Install Rancher
+    shell: |
+      helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.jalibhai.co.uk --set bootstrapPassword={{ sudo_pass}}
+
+  - name: Create Rancher Service
+    shell: |
+      kubectl apply -f - <<EOF
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: rancher-lb
+        namespace: cattle-system
+      spec:
+        type: LoadBalancer
+        selector:
+          app: rancher
+        ports:
+          - name: http
+            port: 80
+            targetPort: 80
+          - name: https
+            port: 443
+            targetPort: 443
+        loadBalancerIP: 10.55.10.202
+      EOF

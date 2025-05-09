@@ -1,3 +1,5 @@
 .venv
 vault
 vault_password.txt
+vms/group_vars/pvenodes/images
+vms/group_vars/pvenodes/vms

@@ -17,8 +17,6 @@
     when: 'item.state == "new"'
     no_log: true
 
-  # P
-
   # Destroy VMs
   - name: Destroy VMs
     proxmox_kvm:

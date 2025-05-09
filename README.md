@@ -14,6 +14,7 @@ In `vms/group_vars/all`, change the project path to `<project_dir>/vms`
 ```
 default_user: <user>
 default_pass: <hashed pass>
+sudo_pass: <sudo pass>
 ```
 
 - Create the pve connection vault

@@ -1,0 +1,13 @@
+- import_playbook: k8s_nodes.yml
+- import_playbook: k8s_dependencies.yml
+- import_playbook: k8s_control_plane.yml
+- import_playbook: k8s_init.yml
+- import_playbook: cilium_install.yml
+- import_playbook: k8s_workers.yml
+- import_playbook: k8s_masters.yml
+
+- import_playbook: k8s_lb.yml
+- import_playbook: k8s_hubble.yml
+- import_playbook: k8s_cert_manager.yml
+- import_playbook: k8s_metrics_server.yml
+- import_playbook: k8s_rancher.yml
