@@ -4,7 +4,10 @@ image_path: '/var/lib/vz/images/0/'
 domain: '.jalibhai.co.uk'
 timezone: 'Europe/London'
 locale: 'en_GB.UTF-8'
-group_name: pvenodes
 variable_files:
-  - images
-  - vms
+  - name: images
+    group: pvenodes
+  - name: vms
+    group: pvenodes
+  - name: services
+    group: k8s_nodes

@@ -1,0 +1,11 @@
+  - name: hubble
+    metadata:
+      name: hubble-ui
+      namespace: kube-system
+    selector:
+      k8s-app: hubble-ui
+    ports:
+      - name: http
+        port: 80
+        targetPort: 8081
+    loadBalancerIP: 10.55.10.201
