@@ -1,6 +1,6 @@
 .venv
 vault
 vault_password.txt
-vms/group_vars/pvenodes/images
-vms/group_vars/pvenodes/vms
-vms/group_vars/k8s_nodes/services
+project/group_vars/pvenodes/images
+project/group_vars/pvenodes/vms
+project/group_vars/k8s_nodes/services
