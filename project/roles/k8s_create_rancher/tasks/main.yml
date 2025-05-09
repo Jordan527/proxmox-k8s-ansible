@@ -1,0 +1,15 @@
+- name: Add the Rancher Helm repo
+  shell: |
+    helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+
+- name: Update Helm repo
+  shell: |
+    helm repo update
+
+- name: Create namespace
+  shell: |
+    kubectl create namespace cattle-system
+
+- name: Install Rancher
+  shell: |
+    helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.jalibhai.co.uk --set bootstrapPassword={{ sudo_pass}}

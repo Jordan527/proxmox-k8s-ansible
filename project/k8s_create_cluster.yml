@@ -1,0 +1,46 @@
+- name: Kubernetes Dependencies
+  hosts: k8s_nodes
+  become: yes
+  roles:
+    - k8s_install_dependencies
+
+- hosts: masters
+  become: yes
+  tasks:
+    - name: Install Kubectl
+      apt:
+        name: kubectl=1.29.*
+        state: present
+        force: yes
+
+- name: Install Keepalived and HAProxy for Kubernetes API HA
+  hosts: masters
+  become: true
+  vars:
+    vip: 10.55.10.101
+    interface: eth0
+    priority_offset: 100
+  roles:
+    - k8s_setup_control_plane
+
+- hosts: masters[0]
+  become: yes
+  environment:
+    KUBECONFIG: /home/{{ default_user }}/.kube/config
+  roles:
+    - k8s_initialise_cluster
+    - k8s_create_cilium
+  tasks:
+    - name: Download Helm
+      get_url: 
+        url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+        dest: ./get_helm.sh
+        mode: 0755
+
+    - name: Install Helm
+      shell: ./get_helm.sh
+
+    - name: Remove Helm download file
+      file:
+        path: ./get_helm.sh
+        state: absent

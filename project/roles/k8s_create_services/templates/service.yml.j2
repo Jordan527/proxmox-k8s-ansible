@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ item.metadata.name }}
+  namespace: {{ item.metadata.namespace }}
+spec:
+  type: LoadBalancer
+  selector:
+{% for key, value in item.selector.items() %}
+    {{ key }}: {{ value }}
+{% endfor %}
+  ports:
+{% for port in item.ports %}
+    - name: {{ port.name }}
+      port: {{ port.port }}
+      targetPort: {{ port.targetPort }}
+{% endfor %}
+  loadBalancerIP: {{ item.loadBalancerIP }}

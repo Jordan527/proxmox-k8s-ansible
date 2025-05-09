@@ -1,0 +1,14 @@
+  - name: rancher
+    metadata:
+      name: rancher-lb
+      namespace: cattle-system
+    selector:
+      app: rancher
+    ports:
+      - name: http
+        port: 80
+        targetPort: 80
+      - name: https
+        port: 443
+        targetPort: 443
+    loadBalancerIP: 10.55.10.202

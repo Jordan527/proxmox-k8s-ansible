@@ -1,0 +1,13 @@
+ansible_key_file: /home/jalibhai/.ssh/id_rsa.pub
+project_path: '/home/jalibhai/k8s-ansible/project/'
+image_path: '/var/lib/vz/images/0/'
+domain: '.jalibhai.co.uk'
+timezone: 'Europe/London'
+locale: 'en_GB.UTF-8'
+variable_files:
+  - name: images
+    group: pvenodes
+  - name: vms
+    group: pvenodes
+  - name: services
+    group: k8s_nodes
