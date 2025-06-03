@@ -1,0 +1,12 @@
+- hosts: masters[0]
+  become: yes
+  gather_facts: false
+  environment:
+    KUBECONFIG: /home/{{ default_user }}/.kube/config
+  roles:
+    - k8s_create_metallb
+    - k8s_create_cert_manager
+    - k8s_create_metrics_server
+    - k8s_create_rancher
+    - k8s_create_argocd
+    - k8s_create_services

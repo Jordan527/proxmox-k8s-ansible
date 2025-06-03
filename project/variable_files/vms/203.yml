@@ -1,0 +1,14 @@
+  - name: k8s-worker-general-01
+    role: worker
+    vmid: 203
+    node: pve-01
+    image_file: debian-12-generic-amd64.qcow2
+    cores: 8
+    memory: 49152
+    vlan: 20
+    ipv4mode: static
+    ipv4_address: 10.55.10.105/24
+    ipv4_gateway: 10.55.10.1
+    disk_size: 128G
+    drive_storage: lvm-1
+    state: new

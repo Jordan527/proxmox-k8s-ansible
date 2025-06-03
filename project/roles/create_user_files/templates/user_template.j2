@@ -1,0 +1,28 @@
+#cloud-config
+hostname: {{item.name}}
+fqdn: {{item.name}}{{domain}}
+
+users:
+  - name: {{ default_user }}
+    shell: /bin/bash
+    groups: sudo
+    passwd: "{{ default_pass }}"
+    lock_passwd: false
+    ssh_authorized_keys:
+      - "{{ lookup('file', ansible_key_file) }}"
+
+package_update: true
+package_upgrade: true
+timezone: {{timezone}}
+
+packages:
+    - qemu-guest-agent
+    - ufw
+
+runcmd:
+    - sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    - systemctl enable qemu-guest-agent
+    - systemctl start qemu-guest-agent
+    - locale-gen {{locale}}
+    - localectl set-locale LANG={{locale}}
+    - chfn -f Ansible {{ansible_user}}

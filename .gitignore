@@ -1,0 +1,6 @@
+.venv
+vault
+vault_password.txt
+project/group_vars/pvenodes/images
+project/group_vars/pvenodes/vms
+project/group_vars/k8s_nodes/services
